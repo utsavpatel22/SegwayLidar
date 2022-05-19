@@ -12,15 +12,15 @@
       <param name="publish_datagram" type="bool" value="False" />
       <param name="subscribe_datagram" type="bool" value="false" />
       <param name="device_number" type="int" value="0" />
-      <param name="range_min" type="double" value="0.2" />
       <param name="range_max" type="double" value="64.0" />
     -->
+    <param name="range_min" type="double" value="0.2" />
 
     <!-- Older versions of the scanner firmware report an incorrect time_increment.
          If you get a warning about time_increment, uncomment this. -->
     <!-- <param name="time_increment" type="double" value="0.000061722" /> -->
-
-    <param name="hostname" type="string" value="192.168.0.1" />
+    <!-- <remap from="/scan" to="/lidar_scan" /> -->
+    <param name="hostname" type="string" value="192.168.0.12" />
     <param name="port" type="string" value="2111" />
   </node>
 </launch>

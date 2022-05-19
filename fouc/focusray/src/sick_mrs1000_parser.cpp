@@ -252,8 +252,12 @@ int SickMRS1000Parser::parse_datagram(char* datagram, size_t datagram_length, Si
       {
         if (range == 0)
           scan.ranges[j - index_min] = std::numeric_limits<float>::infinity();
-        else
-          scan.ranges[j - index_min] = range_meter;
+        else {
+          if (override_range_min_ > range_meter)
+            scan.ranges[j - index_min] = override_range_max_;
+          else
+            scan.ranges[j - index_min] = range_meter;
+        }
       }
 
       /*
@@ -306,7 +310,7 @@ int SickMRS1000Parser::parse_datagram(char* datagram, size_t datagram_length, Si
         unsigned short intensity;
         sscanf(fields[j + offset], "%hx", &intensity);
         scan.intensities[j - index_min] = intensity;
-	printf("----- %d\n",intensity);
+	// printf("----- %d\n",intensity);
       }
     } else {
       ROS_WARN_ONCE("Intensity parameter is enabled, but the scanner is not configured to send RSSI values! "
